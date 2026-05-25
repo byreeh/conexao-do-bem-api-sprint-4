@@ -1,6 +1,6 @@
 package br.com.fiap.dao;
 
-import br.com.fiap.conexoes.ConexaoFactoy;
+import br.com.fiap.conexoes.ConexaoFactory;
 import br.com.fiap.entities.Paciente;
 import br.com.fiap.excecoes.OdontoClinicException;
 import br.com.fiap.excecoes.RecursoNaoEncontradoException;
@@ -13,8 +13,8 @@ public class PacienteDAO {
 
     private Connection minhaConexao;
 
-    public PacienteDAO() throws SQLException, ClassNotFoundException, SQLException {
-        this.minhaConexao = new ConexaoFactoy().conexao();
+    public PacienteDAO() throws SQLException, ClassNotFoundException {
+        this.minhaConexao = new ConexaoFactory().conexao();
     }
 
 
@@ -36,9 +36,7 @@ public class PacienteDAO {
 
 
     public void inserir(Paciente paciente) {
-        DatabaseMetaData connectionFactory = null;
-        try (Connection conn = connectionFactory.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(INSERT)) {
+        try (PreparedStatement stmt = minhaConexao.prepareStatement(INSERT)) {
 
             stmt.setString(1, paciente.getNome());
             stmt.setString(2, paciente.getCpf());
@@ -57,10 +55,7 @@ public class PacienteDAO {
 
     public List<Paciente> listarTodos() {
         List<Paciente> lista = new ArrayList<>();
-
-        DatabaseMetaData connectionFactory;
-        try (Connection conn = connectionFactory.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(SELECT_ALL);
+        try (PreparedStatement stmt = minhaConexao.prepareStatement(SELECT_ALL);
              ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {
@@ -76,9 +71,7 @@ public class PacienteDAO {
 
 
     public Paciente buscarPorId(Long id) {
-
-        try (Connection conn = connectionFactory.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(SELECT_BY_ID)) {
+        try (PreparedStatement stmt = minhaConexao.prepareStatement(SELECT_BY_ID)) {
 
             stmt.setLong(1, id);
 
@@ -96,9 +89,7 @@ public class PacienteDAO {
     }
 
     public void atualizar(Paciente paciente) {
-
-        try (Connection conn = connectionFactory.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(UPDATE)) {
+        try (PreparedStatement stmt = minhaConexao.prepareStatement(UPDATE)) {
 
             stmt.setString(1, paciente.getNome());
             stmt.setString(2, paciente.getTelefone());
@@ -115,9 +106,7 @@ public class PacienteDAO {
 
 
     public void deletar(Long id) {
-
-        try (Connection conn = connectionFactory.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(DELETE_LOGICO)) {
+        try (PreparedStatement stmt = minhaConexao.prepareStatement(DELETE_LOGICO)) {
 
             stmt.setLong(1, id);
             stmt.executeUpdate();
@@ -131,7 +120,7 @@ public class PacienteDAO {
     private Paciente mapear(ResultSet rs) throws SQLException {
         Paciente p = new Paciente();
 
-        p.setId(rs.getLong("ID"));
+        p.setId(rs.getInt("ID"));
         p.setNome(rs.getString("NOME"));
         p.setCpf(rs.getString("CPF"));
         p.setTelefone(rs.getString("TELEFONE"));
@@ -146,9 +135,6 @@ public class PacienteDAO {
         p.setAtivo(rs.getInt("ATIVO") == 1);
 
         return p;
-    }
-
-
     }
 
 }

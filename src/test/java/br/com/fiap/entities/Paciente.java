@@ -11,12 +11,12 @@ public class Paciente {
     private String email;
     private LocalDate dataNascimento;
     private boolean ativo;
-    private PlanoOdontologico planoOdontologico;
+    private String planoOdontologico;
 
     public Paciente() {
     }
 
-    public Paciente(int id, String nome, String cpf, String telefone, String email, LocalDate dataNascimento, boolean ativo) {
+    public Paciente(int id, String nome, String cpf, String telefone, String email, LocalDate dataNascimento, boolean ativo, String planoOdontologico) {
         this.id = id;
         this.nome = nome;
         this.cpf = cpf;
@@ -24,6 +24,7 @@ public class Paciente {
         this.email = email;
         this.dataNascimento = dataNascimento;
         this.ativo = ativo;
+        this.planoOdontologico = planoOdontologico;
     }
 
     public int getId() {
@@ -82,6 +83,14 @@ public class Paciente {
         this.ativo = ativo;
     }
 
+    public String getPlanoOdontologico() {
+        return planoOdontologico;
+    }
+
+    public void setPlanoOdontologico(String planoOdontologico) {
+        this.planoOdontologico = planoOdontologico;
+    }
+
     @Override
     public String toString() {
         return "\n\n=== Paciente - Dados do Paciente ===\n" +
@@ -91,6 +100,7 @@ public class Paciente {
                 "\nTelefone: " + telefone +
                 "\nE-mail: " + email +
                 "\nData de Nascimento: " + dataNascimento +
-                "\nAtivo: " + ativo;
+                "\nAtivo: " + ativo +
+                "\nPlano Odontologico: " + planoOdontologico;
     }
 }

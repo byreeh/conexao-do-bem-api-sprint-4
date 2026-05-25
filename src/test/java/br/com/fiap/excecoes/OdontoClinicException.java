@@ -9,5 +9,5 @@ public class OdontoClinicException extends RuntimeException {
         public OdontoClinicException(String message, Throwable cause) {
             super(message, cause);
         }
-    }
+
 }
