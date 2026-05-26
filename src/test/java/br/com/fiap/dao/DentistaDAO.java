@@ -1,8 +1,12 @@
 package br.com.fiap.dao;
 
+import br.com.fiap.conexoes.ConexaoFactory;
 import br.com.fiap.entities.Dentista;
 import br.com.fiap.excecoes.OdontoClinicException;
 import br.com.fiap.excecoes.RecursoNaoEncontradoException;
+import com.google.inject.Inject;
+import io.agroal.pool.ConnectionFactory;
+import jakarta.enterprise.context.ApplicationScoped;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -12,7 +16,7 @@ import java.util.List;
 public class DentistaDAO {
 
     @Inject
-    ConnectionFactory connectionFactory;
+    ConexaoFactory connectionFactory;
 
     private static final String INSERT =
             "INSERT INTO TB_DENTISTA (ID, NOME, CRO, ESPECIALIDADE, ATIVO) VALUES (SEQ_DENTISTA.NEXTVAL, ?, ?, ?, 1)";
@@ -35,7 +39,7 @@ public class DentistaDAO {
              PreparedStatement stmt = conn.prepareStatement(INSERT)) {
 
             stmt.setString(1, dentista.getNome());
-            stmt.setString(2, dentista.getCRO());
+            stmt.setString(2, dentista.getCro());
             stmt.setString(3, dentista.getEspecialidade());
 
             stmt.executeUpdate();
@@ -45,7 +49,6 @@ public class DentistaDAO {
         }
     }
 
-    // ================= READ =================
     public List<Dentista> listarTodos() {
         List<Dentista> lista = new ArrayList<>();
 
@@ -88,7 +91,7 @@ public class DentistaDAO {
              PreparedStatement stmt = conn.prepareStatement(UPDATE)) {
 
             stmt.setString(1, dentista.getNome());
-            stmt.setString(2, dentista.getCRO());
+            stmt.setString(2, dentista.getCro());
             stmt.setString(3, dentista.getEspecialidade());
             stmt.setLong(4, dentista.getId());
 
@@ -122,9 +125,9 @@ public class DentistaDAO {
 
     private Dentista mapear(ResultSet rs) throws SQLException {
         Dentista d = new Dentista();
-        d.setId(rs.getInt("ID"));
+        d.setId(rs.getLong("ID"));
         d.setNome(rs.getString("NOME"));
-        d.setCRO(rs.getString("CRO"));
+        d.setCro(rs.getString("CRO"));
         d.setEspecialidade(rs.getString("ESPECIALIDADE"));
         d.setAtivo(rs.getInt("ATIVO") == 1);
         return d;

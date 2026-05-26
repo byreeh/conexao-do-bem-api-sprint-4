@@ -1,7 +1,7 @@
 package br.com.fiap.entities;
 
 public class Dentista {
-    private int id;
+    private Long id;
     private String nome;
     private String cro;
     private String especialidade;
@@ -10,7 +10,7 @@ public class Dentista {
     public Dentista(){
     }
 
-    public Dentista(int id, String nome, String cro, String especialidade, boolean ativo) {
+    public Dentista(Long id, String nome, String cro, String especialidade, boolean ativo) {
         this.id = id;
         this.nome = nome;
         this.cro = cro;
@@ -18,11 +18,11 @@ public class Dentista {
         this.ativo = ativo;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

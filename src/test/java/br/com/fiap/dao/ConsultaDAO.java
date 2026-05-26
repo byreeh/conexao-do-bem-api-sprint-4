@@ -3,6 +3,7 @@ package br.com.fiap.dao;
 import br.com.fiap.excecoes.OdontoClinicException;
 import br.com.fiap.excecoes.RecursoNaoEncontradoException;
 import br.com.fiap.entities.Consulta;
+import br.com.fiap.conexoes.ConexaoFactory;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
@@ -14,7 +15,7 @@ import java.util.List;
 public class ConsultaDAO {
 
     @Inject
-    ConnectionFactory connectionFactory;
+    ConexaoFactory connectionFactory;
 
     // ===================== SQL =====================
 

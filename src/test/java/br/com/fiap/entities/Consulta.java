@@ -1,15 +1,17 @@
 package br.com.fiap.entities;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
 
 public class Consulta {
 
-    private int id;
-    private int pacienteId;
-    private int dentistaId;
+    private Long id;
+    private Long pacienteId;
+    private Long dentistaId;
     private LocalDateTime dataHora;
     private double valor;
     private Status status;
+
 
     public enum Status{
         AGENDADA,
@@ -18,44 +20,16 @@ public class Consulta {
         REALIZADA
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public int getpacienteId() {
-        return pacienteId;
-    }
-
-    public void setpacienteId(int pacienteId) {
+    public void setPacienteId(Long pacienteId) {
         this.pacienteId = pacienteId;
     }
 
-    public int getDentistaId() {
-        return dentistaId;
-    }
-
-    public void setDentistaId(int dentistaId) {
+    public void setDentistaId(Long dentistaId) {
         this.dentistaId = dentistaId;
-    }
-
-    public LocalDateTime getDataHora() {
-        return dataHora;
-    }
-
-    public void setDataHora(LocalDateTime dataHora) {
-        this.dataHora = dataHora;
-    }
-
-    public double getValor() {
-        return valor;
-    }
-
-    public void setValor(double valor) {
-        this.valor = valor;
     }
 
     public Status getStatus() {
@@ -70,7 +44,7 @@ public class Consulta {
     public String toString() {
         return "\n\n === Consulta ===\n" +
                 "\nID: " +
-                "\nPaicente ID: " + pacienteId +
+                "\nPaciente ID: " + pacienteId +
                 "\nDentista ID: " + dentistaId +
                 "\nData e Hora=" + dataHora +
                 "\nValor=" + valor +

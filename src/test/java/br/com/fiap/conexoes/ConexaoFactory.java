@@ -5,11 +5,15 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class ConexaoFactory {
-    public Connection conexao() throws ClassNotFoundException, SQLException {
-
-        Class.forName("oracle.jdbc.driver.OracleDriver");
-
-        return DriverManager.getConnection("jdbc:oracle:thin:@oracle.fiap.com.br:1521:orcl",
-                "rm568510", "281299");
+    public Connection getConnection() throws SQLException {
+        try {
+            Class.forName("oracle.jdbc.driver.OracleDriver");
+        } catch (ClassNotFoundException e) {
+            throw new SQLException("Driver não encontrado", e);
+        }
+        return DriverManager.getConnection(
+                "jdbc:oracle:thin:@oracle.fiap.com.br:1521:orcl",
+                "rm568510", "281299"
+        );
     }
 }
