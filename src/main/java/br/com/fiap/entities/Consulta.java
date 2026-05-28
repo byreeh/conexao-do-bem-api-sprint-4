@@ -12,6 +12,37 @@ public class Consulta {
     private double valor;
     private Status status;
 
+    public Long getId() {
+        return id;
+    }
+
+    public Long getPacienteId() {
+        return pacienteId;
+    }
+
+    public Long getDentistaId() {
+        return dentistaId;
+    }
+
+    public LocalDateTime getDataHora() {
+        return dataHora;
+    }
+
+    public void setDataHora(LocalDateTime dataHora) {
+        this.dataHora = dataHora;
+    }
+
+    public double getValor() {
+        return valor;
+    }
+    public void setValor(double valor) {
+        this.valor = valor;
+    }
+
+    public void setvalor(double valor) {
+        this.valor = valor;
+    }
+
 
     public enum Status{
         AGENDADA,

@@ -2,24 +2,24 @@ package br.com.fiap.entities;
 
 public class PlanoOdontologico {
 
-    private int id;
+    private Long id;
     private String nome;
     private double valor;
 
     public PlanoOdontologico() {
     }
 
-    public PlanoOdontologico(int id, String nome, double valor) {
+    public PlanoOdontologico(Long id, String nome, double valor) {
         this.id = id;
         this.nome = nome;
         this.valor = valor;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

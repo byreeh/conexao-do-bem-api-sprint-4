@@ -2,12 +2,11 @@ package br.com.fiap.resource;
 
 import br.com.fiap.bo.PacienteBO;
 import br.com.fiap.entities.Paciente;
+import jakarta.ws.rs.*;
 
 import java.sql.SQLException;
 import java.util.List;
 
-import jakarta.ws.rs.PathParam;
-import jakarta.ws.rs.*;
 
 
     public class PacienteResource {
@@ -65,5 +64,5 @@ import jakarta.ws.rs.*;
 
             return "Paciente deletado com sucesso!";
         }
-    }
+
 }

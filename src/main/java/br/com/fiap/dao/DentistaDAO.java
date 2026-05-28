@@ -4,8 +4,7 @@ import br.com.fiap.conexoes.ConexaoFactory;
 import br.com.fiap.entities.Dentista;
 import br.com.fiap.excecoes.OdontoClinicException;
 import br.com.fiap.excecoes.RecursoNaoEncontradoException;
-import com.google.inject.Inject;
-import io.agroal.pool.ConnectionFactory;
+import jakarta.inject.Inject;
 import jakarta.enterprise.context.ApplicationScoped;
 
 import java.sql.*;
@@ -33,7 +32,6 @@ public class DentistaDAO {
     private static final String DELETE =
             "UPDATE TB_DENTISTA SET ATIVO = 0 WHERE ID = ?";
 
-    // ================= CREATE =================
     public void inserir(Dentista dentista) {
         try (Connection conn = connectionFactory.getConnection();
              PreparedStatement stmt = conn.prepareStatement(INSERT)) {

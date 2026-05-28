@@ -2,22 +2,22 @@ package br.com.fiap.entities;
 
 public class Especialidade {
 
-    private int id;
+    private Long id;
     private String nome;
 
     public Especialidade() {
     }
 
-    public Especialidade(int id, String nome) {
+    public Especialidade(Long id, String nome) {
         this.id = id;
         this.nome = nome;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

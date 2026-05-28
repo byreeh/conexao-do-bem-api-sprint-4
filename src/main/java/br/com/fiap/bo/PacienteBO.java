@@ -33,7 +33,7 @@ public class PacienteBO {
     }
 
 
-    public Paciente buscarPorId(int id) throws SQLException {
+    public Paciente buscarPorId(Long id) throws SQLException {
         return pacienteDAO.buscarPorId(id);
     }
 
@@ -48,7 +48,7 @@ public class PacienteBO {
     }
 
 
-    public void deletar(int id) throws SQLException {
+    public void deletar(Long id) throws SQLException {
         pacienteDAO.deletar(id);
     }
 }
