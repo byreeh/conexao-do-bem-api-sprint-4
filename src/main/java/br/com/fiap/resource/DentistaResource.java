@@ -7,6 +7,8 @@ import jakarta.ws.rs.*;
 import java.sql.SQLException;
 import java.util.List;
 
+
+@Path("/dentista")
 public class DentistaResource {
 
     private PacienteBO pacienteBO;

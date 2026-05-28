@@ -8,61 +8,61 @@ import java.sql.SQLException;
 import java.util.List;
 
 
+@Path("/paciente")
+public class PacienteResource {
 
-    public class PacienteResource {
+    private PacienteBO pacienteBO;
 
-        private PacienteBO pacienteBO;
-
-        public PacienteResource() throws SQLException, ClassNotFoundException {
-            pacienteBO = new PacienteBO();
-        }
-
-
-        @POST
-        public String inserir(Paciente paciente) throws SQLException {
-
-            pacienteBO.inserir(paciente);
-
-            return "Paciente cadastrado com sucesso!";
-        }
+    public PacienteResource() throws SQLException, ClassNotFoundException {
+        pacienteBO = new PacienteBO();
+    }
 
 
-        @GET
-        public List<Paciente> listarTodos() throws SQLException {
-            return pacienteBO.listarTodos();
-        }
+    @POST
+    public String inserir(Paciente paciente) throws SQLException {
+
+        pacienteBO.inserir(paciente);
+
+        return "Paciente cadastrado com sucesso!";
+    }
 
 
-        @GET
-        @Path("/{id}")
-
-        public Paciente buscarPorId(@PathParam("id") Long id)
-                throws SQLException {
-
-            return pacienteBO.buscarPorId(id);
-        }
+    @GET
+    public List<Paciente> listarTodos() throws SQLException {
+        return pacienteBO.listarTodos();
+    }
 
 
-        @PUT
+    @GET
+    @Path("/{id}")
 
-        public String atualizar(Paciente paciente)
-                throws SQLException {
+    public Paciente buscarPorId(@PathParam("id") Long id)
+            throws SQLException {
 
-            pacienteBO.atualizar(paciente);
-
-            return "Paciente atualizado com sucesso!";
-        }
+        return pacienteBO.buscarPorId(id);
+    }
 
 
-        @DELETE
-        @Path("/{id}")
+    @PUT
 
-        public String deletar(@PathParam("id") Long id)
-                throws SQLException {
+    public String atualizar(Paciente paciente)
+            throws SQLException {
 
-            pacienteBO.deletar(id);
+        pacienteBO.atualizar(paciente);
 
-            return "Paciente deletado com sucesso!";
-        }
+        return "Paciente atualizado com sucesso!";
+    }
+
+
+    @DELETE
+    @Path("/{id}")
+
+    public String deletar(@PathParam("id") Long id)
+            throws SQLException {
+
+        pacienteBO.deletar(id);
+
+        return "Paciente deletado com sucesso!";
+    }
 
 }
