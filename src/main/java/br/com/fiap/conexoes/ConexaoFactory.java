@@ -3,7 +3,9 @@ package br.com.fiap.conexoes;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import jakarta.enterprise.context.ApplicationScoped;
 
+@ApplicationScoped
 public class ConexaoFactory {
     public Connection getConnection() throws SQLException {
         try {
