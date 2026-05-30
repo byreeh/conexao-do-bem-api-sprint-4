@@ -16,7 +16,7 @@ import java.util.List;
 public class PacienteDAO {
 
     @Inject
-    private ConexaoFactory conexaoFactory;
+    private ConexaoFactory conexaoFactory = new ConexaoFactory();
 
     private static final String INSERT =
             "INSERT INTO TB_PACIENTE (ID, NOME, CPF, TELEFONE, EMAIL, DATA_NASCIMENTO, PLANO_ODONTOLOGICO, ATIVO) " +

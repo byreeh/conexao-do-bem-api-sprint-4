@@ -15,7 +15,7 @@ import java.util.List;
 public class DentistaDAO {
 
     @Inject
-    ConexaoFactory connectionFactory;
+    private ConexaoFactory conexaoFactory = new ConexaoFactory();
 
     private static final String INSERT =
             "INSERT INTO TB_DENTISTA (ID, NOME, CRO, ESPECIALIDADE, ATIVO) VALUES (SEQ_DENTISTA.NEXTVAL, ?, ?, ?, 1)";
@@ -33,7 +33,7 @@ public class DentistaDAO {
             "UPDATE TB_DENTISTA SET ATIVO = 0 WHERE ID = ?";
 
     public void inserir(Dentista dentista) {
-        try (Connection conn = connectionFactory.getConnection();
+        try (Connection conn = conexaoFactory.getConnection();
              PreparedStatement stmt = conn.prepareStatement(INSERT)) {
 
             stmt.setString(1, dentista.getNome());
@@ -50,7 +50,7 @@ public class DentistaDAO {
     public List<Dentista> listarTodos() {
         List<Dentista> lista = new ArrayList<>();
 
-        try (Connection conn = connectionFactory.getConnection();
+        try (Connection conn = conexaoFactory.getConnection();
              PreparedStatement stmt = conn.prepareStatement(SELECT_ALL);
              ResultSet rs = stmt.executeQuery()) {
 
@@ -66,7 +66,7 @@ public class DentistaDAO {
     }
 
     public Dentista buscarPorId(Long id) {
-        try (Connection conn = connectionFactory.getConnection();
+        try (Connection conn = conexaoFactory.getConnection();
              PreparedStatement stmt = conn.prepareStatement(SELECT_BY_ID)) {
 
             stmt.setLong(1, id);
@@ -85,7 +85,7 @@ public class DentistaDAO {
     }
 
     public void atualizar(Dentista dentista) {
-        try (Connection conn = connectionFactory.getConnection();
+        try (Connection conn = conexaoFactory.getConnection();
              PreparedStatement stmt = conn.prepareStatement(UPDATE)) {
 
             stmt.setString(1, dentista.getNome());
@@ -105,7 +105,7 @@ public class DentistaDAO {
     }
 
     public void deletar(Long id) {
-        try (Connection conn = connectionFactory.getConnection();
+        try (Connection conn = conexaoFactory.getConnection();
              PreparedStatement stmt = conn.prepareStatement(DELETE)) {
 
             stmt.setLong(1, id);

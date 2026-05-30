@@ -16,7 +16,7 @@ public class ConsultaDAO {
 
 
     @Inject
-    ConexaoFactory connectionFactory;
+    private ConexaoFactory conexaoFactory = new ConexaoFactory();
 
 
     private static final String INSERT =
@@ -43,7 +43,7 @@ public class ConsultaDAO {
 
 
     public void inserir(Consulta consulta) {
-        try (Connection conn = connectionFactory.getConnection();
+        try (Connection conn = conexaoFactory.getConnection();
              PreparedStatement stmt = conn.prepareStatement(INSERT)) {
 
             stmt.setLong(1, consulta.getPacienteId());
@@ -63,7 +63,7 @@ public class ConsultaDAO {
     public List<Consulta> listarTodas() {
         List<Consulta> lista = new ArrayList<>();
 
-        try (Connection conn = connectionFactory.getConnection();
+        try (Connection conn = conexaoFactory.getConnection();
              PreparedStatement stmt = conn.prepareStatement(SELECT_ALL);
              ResultSet rs = stmt.executeQuery()) {
 
@@ -79,7 +79,7 @@ public class ConsultaDAO {
     }
 
     public Consulta buscarPorId(Long id) {
-        try (Connection conn = connectionFactory.getConnection();
+        try (Connection conn = conexaoFactory.getConnection();
              PreparedStatement stmt = conn.prepareStatement(SELECT_BY_ID)) {
 
             stmt.setLong(1, id);
@@ -100,7 +100,7 @@ public class ConsultaDAO {
     public List<Consulta> buscarPorPaciente(Long pacienteId) {
         List<Consulta> lista = new ArrayList<>();
 
-        try (Connection conn = connectionFactory.getConnection();
+        try (Connection conn = conexaoFactory.getConnection();
              PreparedStatement stmt = conn.prepareStatement(SELECT_BY_PACIENTE)) {
 
             stmt.setLong(1, pacienteId);
@@ -120,7 +120,7 @@ public class ConsultaDAO {
 
 
     public void atualizar(Consulta consulta) {
-        try (Connection conn = connectionFactory.getConnection();
+        try (Connection conn = conexaoFactory.getConnection();
              PreparedStatement stmt = conn.prepareStatement(UPDATE)) {
 
             stmt.setTimestamp(1, Timestamp.valueOf(consulta.getDataHora()));
@@ -136,7 +136,7 @@ public class ConsultaDAO {
     }
 
     public void atualizarStatus(Long id, Consulta.Status status) {
-        try (Connection conn = connectionFactory.getConnection();
+        try (Connection conn = conexaoFactory.getConnection();
              PreparedStatement stmt = conn.prepareStatement(UPDATE_STATUS)) {
 
             stmt.setString(1, status.name());
@@ -151,7 +151,7 @@ public class ConsultaDAO {
 
 
     public void deletar(Long id) {
-        try (Connection conn = connectionFactory.getConnection();
+        try (Connection conn = conexaoFactory.getConnection();
              PreparedStatement stmt = conn.prepareStatement(DELETE)) {
 
             stmt.setLong(1, id);

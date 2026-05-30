@@ -27,7 +27,7 @@ public class PacienteResource {
             pacienteBO.inserir(paciente);
 
             return Response.status(Response.Status.CREATED)
-                    .entity("Paciente cadastrado com sucesso!")
+                    .entity("{\"mensagem\": \"Paciente cadastrado com sucesso\"}")
                     .build();
 
         } catch (SQLException e) {
