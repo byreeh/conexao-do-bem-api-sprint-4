@@ -61,7 +61,7 @@ index.html
 ---
 
 ## Observações
-
+Executar o script SQL disponível no projeto antes de rodar a aplicação.
 - O sistema utiliza banco de dados Oracle
 - É necessário configurar a conexão no arquivo `application.properties`
 - A aplicação depende da existência da tabela `TB_PACIENTE` e da sequence `SEQ_PACIENTE`
