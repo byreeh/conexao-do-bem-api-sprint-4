@@ -1,67 +1,74 @@
-# conexao-do-bem
+# Conexão do Bem API - Sprint 04
 
-This project uses Quarkus, the Supersonic Subatomic Java Framework.
+## Descrição
+Sistema desenvolvido para gerenciamento de pacientes em uma clínica odontológica. A aplicação permite realizar operações de cadastro, listagem, atualização e exclusão de pacientes através de uma API REST desenvolvida com Quarkus.
 
-If you want to learn more about Quarkus, please visit its website: <https://quarkus.io/>.
+---
 
-## Running the application in dev mode
+## Tecnologias Utilizadas
+- Java
+- Quarkus
+- Maven
+- Oracle Database
+- HTML, CSS e JavaScript 
 
-You can run your application in dev mode that enables live coding using:
+---
 
-```shell script
-./mvnw quarkus:dev
-```
+## Como Executar o Projeto
 
-> **_NOTE:_**  Quarkus now ships with a Dev UI, which is available in dev mode only at <http://localhost:8080/q/dev/>.
+### Backend (API)
 
-## Packaging and running the application
+1. Clone o repositório
+2. Execute o comando:
+mvn quarkus:dev
 
-The application can be packaged using:
 
-```shell script
-./mvnw package
-```
+3. Acesse no navegador:
+- Swagger: http://localhost:8081/q/swagger-ui
+- API: http://localhost:8081/paciente
 
-It produces the `quarkus-run.jar` file in the `target/quarkus-app/` directory.
-Be aware that it’s not an _über-jar_ as the dependencies are copied into the `target/quarkus-app/lib/` directory.
+---
 
-The application is now runnable using `java -jar target/quarkus-app/quarkus-run.jar`.
+### Frontend
 
-If you want to build an _über-jar_, execute the following command:
+1. Abra o arquivo:
+index.html
 
-```shell script
-./mvnw package -Dquarkus.package.jar.type=uber-jar
-```
 
-The application, packaged as an _über-jar_, is now runnable using `java -jar target/*-runner.jar`.
+2. Utilize as funcionalidades:
+- Cadastrar paciente
+- Listar pacientes
+- Excluir paciente
 
-## Creating a native executable
+---
 
-You can create a native executable using:
+## Funcionalidades
 
-```shell script
-./mvnw package -Dnative
-```
+- Cadastro de pacientes
+- Listagem de pacientes ativos
+- Atualização de dados
+- Exclusão lógica de pacientes
 
-Or, if you don't have GraalVM installed, you can run the native executable build in a container using:
+---
 
-```shell script
-./mvnw package -Dnative -Dquarkus.native.container-build=true
-```
+## Estrutura do Projeto
 
-You can then execute your native executable with: `./target/conexao-do-bem-1.0.0-SNAPSHOT-runner`
+- `resource` → Endpoints da API
+- `bo` → Regras de negócio
+- `dao` → Acesso ao banco de dados
+- `entities` → Classes modelo
 
-If you want to learn more about building native executables, please consult <https://quarkus.io/guides/maven-tooling>.
+---
 
-## Related Guides
+## Observações
 
-- REST ([guide](https://quarkus.io/guides/rest)): Build RESTful web services and APIs using Jakarta REST (formerly JAX-RS)
-- JDBC Driver - Oracle ([guide](https://quarkus.io/guides/datasource)): Connect to the Oracle database via JDBC
+- O sistema utiliza banco de dados Oracle
+- É necessário configurar a conexão no arquivo `application.properties`
+- A aplicação depende da existência da tabela `TB_PACIENTE` e da sequence `SEQ_PACIENTE`
 
-## Provided Code
+---
 
-### REST
+## Integrantes
 
-Easily start your REST Web Services
-
-[Related guide section...](https://quarkus.io/guides/getting-started-reactive#reactive-jax-rs-resources)
+- Ilda Adosfo - RM: 568233 | Turma: 1TDSPA
+- Renata Lessa - RM: 568510 | Turma: 1TDSPR 
