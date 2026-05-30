@@ -11,11 +11,12 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+
 @ApplicationScoped
 public class PacienteDAO {
 
     @Inject
-    ConexaoFactory conexaoFactory;
+    private ConexaoFactory conexaoFactory;
 
     private static final String INSERT =
             "INSERT INTO TB_PACIENTE (ID, NOME, CPF, TELEFONE, EMAIL, DATA_NASCIMENTO, PLANO_ODONTOLOGICO, ATIVO) " +
