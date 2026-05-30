@@ -2,16 +2,24 @@ package br.com.fiap.bo;
 
 import br.com.fiap.dao.DentistaDAO;
 import br.com.fiap.entities.Dentista;
+import jakarta.enterprise.context.ApplicationScoped;
 
 import java.sql.SQLException;
 import java.util.List;
 
+
+
+@ApplicationScoped
 public class DentistaBO {
 
     private DentistaDAO dentistaDAO;
 
-    public DentistaBO() throws SQLException, ClassNotFoundException {
-        dentistaDAO = new DentistaDAO();
+    public DentistaBO() {
+        try {
+            dentistaDAO = new DentistaDAO();
+        } catch (Exception e) { // ✅ ADD
+            throw new RuntimeException("Erro ao iniciar DentistaDAO", e);
+        }
     }
 
 

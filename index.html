@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Conexão do Bem - Pacientes</title>
+</head>
+<body>
+
+<h1>Cadastro de Paciente</h1>
+
+
+<form id="formPaciente">
+    <label>Nome:</label><br>
+    <input type="text" id="nome" required><br><br>
+
+    <label>Email:</label><br>
+    <input type="email" id="email" required><br><br>
+
+    <button type="submit">Cadastrar</button>
+</form>
+
+<hr>
+
+<h2>Pacientes</h2>
+<button onclick="listarPacientes()">Listar Pacientes</button>
+
+<ul id="lista"></ul>
+
+<script>
+    const API = "http://localhost:8081/paciente";
+
+    document.getElementById("formPaciente").addEventListener("submit", async function(e) {
+        e.preventDefault();
+
+        const nome = document.getElementById("nome").value;
+        const email = document.getElementById("email").value;
+
+        const paciente = {
+            nome: nome,
+            email: email
+        };
+
+        try {
+            const response = await fetch(API, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(paciente)
+            });
+
+            if (response.ok) {
+                alert("Paciente cadastrado!");
+            } else {
+                alert("Erro ao cadastrar");
+            }
+        } catch (error) {
+            console.error(error);
+            alert("Erro na conexão com a API");
+        }
+    });
+
+
+    async function listarPacientes() {
+        try {
+            const response = await fetch(API);
+            const data = await response.json();
+
+            const lista = document.getElementById("lista");
+            lista.innerHTML = "";
+
+            data.forEach(p => {
+                const li = document.createElement("li");
+                li.textContent = p.nome + " - " + p.email;
+                lista.appendChild(li);
+            });
+
+        } catch (error) {
+            console.error(error);
+            alert("Erro ao buscar pacientes");
+        }
+    }
+</script>
+
+</body>
+</html>

@@ -14,10 +14,10 @@ import java.util.List;
 @ApplicationScoped
 public class ConsultaDAO {
 
+
     @Inject
     ConexaoFactory connectionFactory;
 
-    // ===================== SQL =====================
 
     private static final String INSERT =
             "INSERT INTO TB_CONSULTA (ID, PACIENTE_ID, DENTISTA_ID, DATA_HORA, VALOR, STATUS) " +

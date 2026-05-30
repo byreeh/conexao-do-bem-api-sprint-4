@@ -103,7 +103,7 @@ public class PacienteResource {
             pacienteBO.deletar(id);
             return Response.ok("Paciente deletado com sucesso").build();
 
-        } catch (SQLException e) { 
+        } catch (SQLException e) {
 
             return Response.status(500)
                     .entity("Erro ao deletar paciente")

@@ -2,16 +2,23 @@ package br.com.fiap.bo;
 
 import br.com.fiap.dao.PacienteDAO;
 import br.com.fiap.entities.Paciente;
+import jakarta.enterprise.context.ApplicationScoped;
 
 import java.sql.SQLException;
 import java.util.List;
 
+
+@ApplicationScoped
 public class PacienteBO {
 
         private PacienteDAO pacienteDAO;
 
-        public PacienteBO() throws SQLException, ClassNotFoundException {
-            pacienteDAO = new PacienteDAO();
+        public PacienteBO() {
+            try {
+                pacienteDAO = new PacienteDAO();
+            } catch (Exception e) {
+                throw new RuntimeException("Erro ao iniciar PacienteDAO", e);
+            }
         }
 
     public void inserir(Paciente paciente) throws SQLException {
