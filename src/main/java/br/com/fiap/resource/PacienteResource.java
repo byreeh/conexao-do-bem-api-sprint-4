@@ -2,67 +2,113 @@ package br.com.fiap.resource;
 
 import br.com.fiap.bo.PacienteBO;
 import br.com.fiap.entities.Paciente;
-import jakarta.ws.rs.*;
 
-import java.sql.SQLException;
+import jakarta.inject.Inject;
+import jakarta.ws.rs.*;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
+
 import java.util.List;
+import java.sql.SQLException;
 
 
 @Path("/paciente")
+@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
 public class PacienteResource {
 
-    private PacienteBO pacienteBO;
-
-    public PacienteResource() throws SQLException, ClassNotFoundException {
-        pacienteBO = new PacienteBO();
-    }
-
+    @Inject PacienteBO pacienteBO;
 
     @POST
-    public String inserir(Paciente paciente) throws SQLException {
+    public Response inserir(Paciente paciente)  {
 
-        pacienteBO.inserir(paciente);
+        try {
 
-        return "Paciente cadastrado com sucesso!";
+            pacienteBO.inserir(paciente);
+
+            return Response.status(Response.Status.CREATED)
+                    .entity("Paciente cadastrado com sucesso!")
+                    .build();
+
+        } catch (SQLException e) {
+
+            return Response.status(500)
+                    .entity("Erro ao cadastrar paciente")
+                    .build();
+        }
     }
 
 
     @GET
-    public List<Paciente> listarTodos() throws SQLException {
-        return pacienteBO.listarTodos();
+    public Response listarTodos() {
+
+        try {
+
+            List<Paciente> lista = pacienteBO.listarTodos();
+            return Response.ok(lista).build();
+
+        } catch (SQLException e) {
+
+            return Response.status(500)
+                    .entity("Erro ao listar pacientes")
+                    .build();
+        }
     }
 
 
     @GET
     @Path("/{id}")
+    public Response buscarPorId(@PathParam("id") Long id) {
 
-    public Paciente buscarPorId(@PathParam("id") Long id)
-            throws SQLException {
+        try {
+            Paciente paciente = pacienteBO.buscarPorId(id);
+            return Response.ok(paciente).build();
 
-        return pacienteBO.buscarPorId(id);
+        } catch (SQLException e) {
+
+            return Response.status(500)
+                    .entity("Erro ao buscar paciente")
+                    .build();
+        }
+
     }
 
 
     @PUT
+    @Path("/{id}")
+    public Response atualizar(@PathParam("id") Long id, Paciente paciente) {
 
-    public String atualizar(Paciente paciente)
-            throws SQLException {
+        try {
 
-        pacienteBO.atualizar(paciente);
+            paciente.setId(id);
+            pacienteBO.atualizar(paciente);
+            return Response.ok("Paciente atualizado com sucesso!").build();
 
-        return "Paciente atualizado com sucesso!";
+        } catch (SQLException e) {
+
+            return Response.status(500)
+                    .entity("Erro ao atualizar paciente")
+                    .build();
+        }
+
     }
 
 
     @DELETE
     @Path("/{id}")
+    public Response deletar(@PathParam("id") Long id) {
 
-    public String deletar(@PathParam("id") Long id)
-            throws SQLException {
+        try {
 
-        pacienteBO.deletar(id);
+            pacienteBO.deletar(id);
+            return Response.ok("Paciente deletado com sucesso").build();
 
-        return "Paciente deletado com sucesso!";
+        } catch (SQLException e) { 
+
+            return Response.status(500)
+                    .entity("Erro ao deletar paciente")
+                    .build();
+        }
     }
 
 }
